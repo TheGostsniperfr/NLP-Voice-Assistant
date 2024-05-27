@@ -6,11 +6,15 @@ import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 import numpy as np
+from AppOpener import open
 
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[2].id)
+engine.setProperty('voice', voices[3].id)
+
+for voice in engine.getProperty('voices'):
+    print(voice)
 
 def speak(audio):
     engine.say(audio)
@@ -41,7 +45,7 @@ def takeCommand():
     return query
 
 
-conversation = [["Hello", "Hi"],["How are you?", "I am fine"], ["What is your name?", "My name is HAL" ]]
+conversation = [["Hello", "Hi"],["How are you?", "私はいいっです"], ["What is your name?", "My name is HAL"]]
 #make corpus
 corpus = []
 for [q,_] in conversation:
@@ -61,20 +65,47 @@ X_vect = np.array(X.todense().copy())
 def cos_sim(v1, v2):
     costheta = np.dot(v1,v2)/(np.linalg.norm(v1)*np.linalg.norm(v2))
     return(costheta)
+
+def dontUnderstand():
+    speak("I don't understand your question.")    
+
 #REPL
 while True:
-    query =takeCommand()
+    query = takeCommand()
+    query = query.lower()
+    if "None" in query:
+        dontUnderstand()
+        continue
 
     if "quit" in query:
         break
+    
+    if "whatsapp" in query:
+        speak("Openning whatsapp")
+        open("whatsapp")
+        break
+    
+    
+    if "teams" in query:
+        speak("Openning teams")
+        open("teams")
+        break
+    
     q_vect = np.array(vectorizer.transform([query]).todense().copy())[0,:]
     #print(q_vect)
     match = [cos_sim(q_vect, v) for v in X_vect]
+    
+    maxMatch = max(match)
+    if(str(maxMatch) == "nan" or max(match) < 0.5 ):
+        dontUnderstand()
+        continue
+    
     print(match)
     #find max index
     indexMax = max([(v,i) for i,v in enumerate(match)])
     #print(indexMax)
     speak(conversation[indexMax[1]][1])
+
 
 
 # while True:
