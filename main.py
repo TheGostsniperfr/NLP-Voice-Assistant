@@ -44,8 +44,12 @@ def takeCommand():
      
     return query
 
+conversation = [
+    ["Hello", "Hi"],
+    ["How are you?", "I'm good, thank you."],
+    ["What's your name?", "My name is HAL."]]
 
-conversation = [["Hello", "Hi"],["How are you?", "私はいいっです"], ["What is your name?", "My name is HAL"]]
+
 #make corpus
 corpus = []
 for [q,_] in conversation:
@@ -104,6 +108,7 @@ while True:
     #find max index
     indexMax = max([(v,i) for i,v in enumerate(match)])
     #print(indexMax)
+    print("Understand: " + conversation[indexMax[1]][0])
     speak(conversation[indexMax[1]][1])
 
 
