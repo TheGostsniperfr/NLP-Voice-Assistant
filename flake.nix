@@ -17,6 +17,9 @@
         #python311Packages.numpy
         #python311Packages.nltk
         python311Packages.flet
+        python311Packages.flet-runtime
+        python311Packages.flet-core
+        flet-client-flutter
 ];
 
     shellHook = ''
