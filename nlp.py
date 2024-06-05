@@ -63,9 +63,6 @@ stopwords = nltk.corpus.stopwords.words('english')
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(corpus)
 X_vect = np.array(X.todense().copy())
-#print(X_vect)
-#print(vectorizer.get_feature_names())
-#cosine similarity
 def cos_sim(v1, v2):
     costheta = np.dot(v1,v2)/(np.linalg.norm(v1)*np.linalg.norm(v2))
     return(costheta)
@@ -96,7 +93,6 @@ while True:
         break
     
     q_vect = np.array(vectorizer.transform([query]).todense().copy())[0,:]
-    #print(q_vect)
     match = [cos_sim(q_vect, v) for v in X_vect]
     
     maxMatch = max(match)

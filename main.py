@@ -1,6 +1,5 @@
 import flet as ft
+import ui
 
-def main(page: ft.Page):
-    page.add(ft.Text(value="Hello, world!"))
-
-ft.app(target=main)
+if __name__ == "__main__":
+    ft.app(target=ui.chatting)
