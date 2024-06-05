@@ -20,9 +20,6 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
-
-
-
 def takeCommand():
     r = sr.Recognizer()
      
@@ -68,60 +65,51 @@ def cos_sim(v1, v2):
     return(costheta)
 
 def dontUnderstand():
-    speak("I don't understand your question.")    
+    msg = "I don't understand your question."
+    speak(msg)
+    return msg
+
+def openWhatsapp():
+    msg = "Openning whatsapp"
+    speak(msg)
+    open("whatsapp")
+    return msg    
+
+def openTeams():
+    msg = "Openning teams"
+    open("teams")
+    speak(msg)
+    return msg
 
 #REPL
-while True:
+def process(query: str) -> str:
     query = takeCommand()
     query = query.lower()
     if "None" in query:
-        dontUnderstand()
-        continue
+        return dontUnderstand()
 
     if "quit" in query:
-        break
+        return "Bye"
     
     if "whatsapp" in query:
-        speak("Openning whatsapp")
-        open("whatsapp")
-        break
-    
-    
+        return openWhatsapp()
+
     if "teams" in query:
-        speak("Openning teams")
-        open("teams")
-        break
+        return openTeams()
     
     q_vect = np.array(vectorizer.transform([query]).todense().copy())[0,:]
     match = [cos_sim(q_vect, v) for v in X_vect]
     
     maxMatch = max(match)
     if(str(maxMatch) == "nan" or max(match) < 0.5 ):
-        dontUnderstand()
-        continue
+        return dontUnderstand()
     
-    print(match)
+    # print(match)
     #find max index
     indexMax = max([(v,i) for i,v in enumerate(match)])
     #print(indexMax)
-    print("Understand: " + conversation[indexMax[1]][0])
-    speak(conversation[indexMax[1]][1])
+    
+    msg =  conversation[indexMax[1]][0]
+    speak(msg)
+    return msg
 
-
-
-# while True:
-#     command = takeCommand()
-#     #Conversational
-#     if 'how are you' in command:
-#         speak("I'm doing well")
-#     if 'thank you' in command:
-#         speak("Anytime")
-
-#     #Tasks
-#     if 'time' in command:
-#         now = datetime.now()
-#         current_time = now.strftime("%H:%M:%S")
-#         speak("The Current Time is " + current_time)  
-#     if 'random number' in command:
-#         randInt = random.randint(0, 10) 
-#         speak("A random number between 0 and 10 is " + str(randInt))
