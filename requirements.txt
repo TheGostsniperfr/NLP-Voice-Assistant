@@ -1,0 +1,7 @@
+flet
+SpeechRecognition
+pyttsx3
+scikit-learn
+nltk
+numpy
+AppOpener
