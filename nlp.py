@@ -121,7 +121,7 @@ class ChatBotLogic:
 
 
 
-e = ChatBotLogic(conversation)
+#e = ChatBotLogic(conversation)
 
-while(True):
-    print(e.process())
+#while(True):
+#    print(e.process())
