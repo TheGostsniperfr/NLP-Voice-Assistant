@@ -18,15 +18,17 @@ def chatting(page: ft.Page):
 
     def hear(e):
         query = chatBot.takeCommand()
-        asyncio.run(type_text(page, new_message), query)
+        asyncio.run(type_text(page, new_message, query))
 
     def send_click(e):
         chat.controls.append(ft.Text(new_message.value))
         chat.controls.append(ft.Text(""))
         new_message.value = ""
         page.update()
-        asyncio.run(type_text(page, chat.controls[len(chat.controls) - 1], "Hello, it is me :p"))
+        query = new_message.value
+        newText = chatBot.process(query)
+        asyncio.run(type_text(page, chat.controls[len(chat.controls) - 1], newText))
     page.add(
-        chat, ft.Row(controls=[new_message, ft.ElevatedButton("Speak", on_click=send_click), ft.ElevatedButton("Send", on_click=hear)])
+        chat, ft.Row(controls=[new_message, ft.ElevatedButton("Speak", on_click=hear), ft.ElevatedButton("Send", on_click=send_click)])
     )
 
