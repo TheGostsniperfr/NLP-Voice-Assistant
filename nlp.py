@@ -49,7 +49,7 @@ class ChatBotLogic:
         self.engine.say(audio)
         self.engine.runAndWait()
         
-    def takeCommand(self, verbose):
+    def takeCommand(self, verbose = False):
         r = sr.Recognizer()
         
         with sr.Microphone() as source:
@@ -87,8 +87,8 @@ class ChatBotLogic:
         self.speak(msg)
         return msg
 
-    def process(self, verbose = False) -> str:
-        query = self.takeCommand(verbose)
+    def process(self, verbose = False, query = "") -> str:
+        #query = self.takeCommand(verbose)
         query = query.lower()
         if "None" in query:
             return self.dontUnderstand()

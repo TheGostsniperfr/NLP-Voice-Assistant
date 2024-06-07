@@ -1,5 +1,5 @@
 import flet as ft
-from ChatBotLogic import *
+from nlp import *
 import asyncio
 
 async def type_text(page, text_field, text, delay=0.1):
@@ -26,7 +26,7 @@ def chatting(page: ft.Page):
         new_message.value = ""
         page.update()
         query = new_message.value
-        newText = chatBot.process(query)
+        newText = chatBot.process(query = query)
         asyncio.run(type_text(page, chat.controls[len(chat.controls) - 1], newText))
     page.add(
         chat, ft.Row(controls=[new_message, ft.ElevatedButton("Speak", on_click=hear), ft.ElevatedButton("Send", on_click=send_click)])
