@@ -8,8 +8,7 @@ import nltk
 import numpy as np
 from AppOpener import open
 import os
-import subprocess
-
+from ui import startSpeaking, stopSpeaking
 
 
 
@@ -51,9 +50,11 @@ class ChatBotLogic:
         self.engine.say(audio)
         self.engine.runAndWait()
         
-    def takeCommand(self, verbose = False):
+    def takeCommand(self, verbose = False, page = None):
         r = sr.Recognizer()
         
+        if page != None : startSpeaking(page)
+
         with sr.Microphone() as source:
             
             if verbose : print("Now listening")
@@ -63,6 +64,7 @@ class ChatBotLogic:
         try:
             if verbose : print("Deciphering")   
             query = r.recognize_google(audio, language ='en-in')
+            if page != None : stopSpeaking(page)
             if verbose : print("You Said: " + query)
     
         except Exception as e:
@@ -81,7 +83,7 @@ class ChatBotLogic:
         msg = "Openning whatsapp"
         self.speak(msg)
         open("whatsapp")
-        return msg    
+        return msg
 
     def openSpotify(self):
         msg = "Openning Spotify"
