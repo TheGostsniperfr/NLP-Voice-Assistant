@@ -14,7 +14,7 @@ def chatting(page: ft.Page):
     chat = ft.Column()
     new_message = ft.TextField(label="Message to send", hint_text="")
     
-    chatBot = ChatBotLogic(conversation)
+  chatBot = ChatBotLogic(conversation)
 
     def hear(e):
         query = chatBot.takeCommand()
@@ -24,12 +24,15 @@ def chatting(page: ft.Page):
         chat.controls.append(ft.Text(new_message.value))
         chat.controls.append(ft.Text(""))
         query = new_message.value
-
         new_message.value = ""
         page.update()
         newText = chatBot.process(query = query)
         asyncio.run(type_text(page, chat.controls[len(chat.controls) - 1], newText))
     page.add(
-        chat, ft.Row(controls=[new_message, ft.ElevatedButton("Speak", on_click=hear), ft.ElevatedButton("Send", on_click=send_click)])
+        chat, ft.Row(
+            controls=[
+            new_message,
+            ft.IconButton(icon=ft.icons.MIC_NONE, on_click=hear, tooltip="Activate record query"),
+            ft.IconButton(icon=ft.icons.SEND, on_click=send_click, tooltip="Send query")])
     )
 
