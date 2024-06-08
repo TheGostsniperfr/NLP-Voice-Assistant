@@ -14,7 +14,7 @@ def chatting(page: ft.Page):
     chat = ft.Column()
     new_message = ft.TextField(label="Message to send", hint_text="")
     
-  chatBot = ChatBotLogic(conversation)
+    chatBot = ChatBotLogic(conversation)
 
     def hear(e):
         if page.controls[1].controls[1].icon == ft.icons.MIC_NONE:

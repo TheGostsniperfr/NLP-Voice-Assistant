@@ -7,6 +7,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 import numpy as np
 from AppOpener import open
+import os
+import subprocess
 
 
 
@@ -81,9 +83,9 @@ class ChatBotLogic:
         open("whatsapp")
         return msg    
 
-    def openTeams(self):
-        msg = "Openning teams"
-        open("teams")
+    def openSpotify(self):
+        msg = "Openning Spotify"
+        open("spotify")
         self.speak(msg)
         return msg
 
@@ -99,8 +101,8 @@ class ChatBotLogic:
         if "whatsapp" in query:
             return self.openWhatsapp()
 
-        if "teams" in query:
-            return self.openTeams()
+        if "spotify" in query:
+            return self.openSpotify()
         
         q_vect = np.array(self.vectorizer.transform([query]).todense().copy())[0,:]
         match = [self.cos_sim(q_vect, v) for v in self.X_vect]
