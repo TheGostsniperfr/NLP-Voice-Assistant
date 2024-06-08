@@ -17,8 +17,19 @@ def chatting(page: ft.Page):
   chatBot = ChatBotLogic(conversation)
 
     def hear(e):
-        query = chatBot.takeCommand()
-        asyncio.run(type_text(page, new_message, query))
+        if page.controls[1].controls[1].icon == ft.icons.MIC_NONE:
+
+            page.controls[1].controls[1].icon = ft.icons.MIC
+            defColor = page.controls[1].controls[1].icon_color
+            page.controls[1].controls[1].icon_color = "red"
+            page.update()
+            
+            query = chatBot.takeCommand()
+            asyncio.run(type_text(page, new_message, query))
+            page.controls[1].controls[1].icon = ft.icons.MIC_NONE
+            page.controls[1].controls[1].icon_color = defColor
+            page.update()
+
 
     def send_click(e):
         chat.controls.append(ft.Text(new_message.value))
