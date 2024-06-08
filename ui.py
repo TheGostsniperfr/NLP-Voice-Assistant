@@ -23,9 +23,10 @@ def chatting(page: ft.Page):
     def send_click(e):
         chat.controls.append(ft.Text(new_message.value))
         chat.controls.append(ft.Text(""))
+        query = new_message.value
+
         new_message.value = ""
         page.update()
-        query = new_message.value
         newText = chatBot.process(query = query)
         asyncio.run(type_text(page, chat.controls[len(chat.controls) - 1], newText))
     page.add(

@@ -25,7 +25,7 @@ class ChatBotLogic:
         
         self.engine = pyttsx3.init()
         self.voices = self.engine.getProperty('voices')
-        self.engine.setProperty('voice', self.voices[3].id)
+        self.engine.setProperty('voice', self.voices[1].id)
         
         #make corpus
         self.corpus = []
@@ -115,13 +115,13 @@ class ChatBotLogic:
         indexMax = max([(v,i) for i,v in enumerate(match)])
         if verbose : print(indexMax)
         
-        msg =  conversation[indexMax[1]][0]
+        msg =  conversation[indexMax[1]][1]
         self.speak(msg)
         return msg
 
 
 
-#e = ChatBotLogic(conversation)
+# e = ChatBotLogic(conversation)
 
-#while(True):
+# while(True):
 #    print(e.process())
