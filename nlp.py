@@ -70,6 +70,7 @@ class ChatBotLogic:
         except Exception as e:
             if verbose : print(e)
             if verbose : print("Did not hear anything") 
+            if page != None: stopSpeaking(page)
             return "None"
         
         return query
