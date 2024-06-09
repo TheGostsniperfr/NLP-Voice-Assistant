@@ -2,17 +2,6 @@ import flet as ft
 from nlp import *
 import asyncio
 
-def startSpeaking(page: ft.Page):
-    page.controls[1].controls[1].icon = ft.icons.MIC
-    page.controls[1].controls[1].icon_color = "red"
-    page.update()
-
-def stopSpeaking(page: ft.Page):
-    page.controls[1].controls[1].icon = ft.icons.MIC_NONE
-    page.controls[1].controls[1].icon_color = page.controls[1].controls[2].icon_color
-    page.update()
-
-
 async def type_text(page, text_field, text, delay=0.1):
     for char in text:
         text_field.value += char

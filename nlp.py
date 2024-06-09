@@ -8,7 +8,7 @@ import nltk
 import numpy as np
 from AppOpener import open
 import os
-from ui import startSpeaking, stopSpeaking
+from utils import startSpeaking, stopSpeaking
 
 
 
