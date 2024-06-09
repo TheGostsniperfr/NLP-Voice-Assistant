@@ -18,7 +18,7 @@ def chatting(page: ft.Page):
 
     def hear(e):
         if page.controls[1].controls[1].icon == ft.icons.MIC_NONE:
-            query = chatBot.takeCommand()
+            query = chatBot.takeCommand(page=page)
             asyncio.run(type_text(page, new_message, query))
 
 
