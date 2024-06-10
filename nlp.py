@@ -86,9 +86,9 @@ class ChatBotLogic:
         open("whatsapp")
         return msg
 
-    def openSpotify(self):
-        msg = "Openning Spotify"
-        open("spotify")
+    def openFirefox(self):
+        msg = "Openning Firefox"
+        open("firefox")
         self.speak(msg)
         return msg
 
@@ -104,8 +104,8 @@ class ChatBotLogic:
         if "whatsapp" in query:
             return self.openWhatsapp()
 
-        if "spotify" in query:
-            return self.openSpotify()
+        if "firefox" in query:
+            return self.openFirefox()
         
         q_vect = np.array(self.vectorizer.transform([query]).todense().copy())[0,:]
         match = [self.cos_sim(q_vect, v) for v in self.X_vect]
