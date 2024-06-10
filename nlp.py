@@ -15,7 +15,10 @@ from utils import startSpeaking, stopSpeaking
 conversation = [
     ["Hello", "Hi"],
     ["How are you?", "I'm good, thank you."],
-    ["What's your name?", "My name is HAL."]]
+    ["What's your name?", "My name is HAL."],
+    ["Who are you?", "Hi, I'm Skynet, your personnal voice assistance."],
+    ["What your favorite game?", "Portal story mel"],
+    ["What is your favorite movie", "My favorite movie is Terminator."]]
 
 
 
@@ -63,7 +66,7 @@ class ChatBotLogic:
     
         try:
             if verbose : print("Deciphering")   
-            query = r.recognize_google(audio, language ='en-in')
+            query = r.recognize_sphinx(audio)
             if page != None : stopSpeaking(page)
             if verbose : print("You Said: " + query)
     

@@ -10,7 +10,7 @@ async def type_text(page, text_field, text, delay=0.1):
 
 
 def chatting(page: ft.Page):
-    page.title = "NLP Project"
+    page.title = "NLP Chatbot"
     chat = ft.Column()
     new_message = ft.TextField(label="Message to send", hint_text="")
     
